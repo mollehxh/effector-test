@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Grid } from './Grid';
+import { gameModel, snakeModel } from './model';
+import './styles.css';
 
-function App() {
+export const App = () => {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      switch (e.code) {
+        case 'Enter':
+          return gameModel.start();
+
+        case 'KeyA':
+          return snakeModel.setDirection('left');
+
+        case 'KeyD':
+          return snakeModel.setDirection('right');
+
+        case 'KeyW':
+          return snakeModel.setDirection('up');
+
+        case 'KeyS':
+          return snakeModel.setDirection('down');
+
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener('keypress', handler);
+    return () => document.removeEventListener('keypress', handler);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      size={8}
+      snakeCoordinates={[[0, 0]]}
+      bountiesCoordinates={[[1, 1]]}
+    ></Grid>
   );
-}
-
-export default App;
+};

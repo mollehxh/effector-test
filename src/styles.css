@@ -1,0 +1,19 @@
+.tile {
+  border: 1px solid black;
+  padding: 1em;
+  display: inline;
+}
+
+.tile.snake {
+  background-color: green;
+}
+
+.tile.bounty {
+  background-color: grey;
+}
+
+.grid {
+  display: grid;
+  height: 20em;
+  width: 20em;
+}
